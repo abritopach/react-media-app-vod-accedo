@@ -1,0 +1,6 @@
+// It's preferable to keep your action types together.
+export const SELECTED_VIDEO = 'SELECTED_VIDEO';
+export const MOCKABLE_VIDEOS_SUCCESS = 'MOCKABLE_VIDEOS_SUCCESS';
+export const SEARCH_MEDIA_REQUEST = 'SEARCH_MEDIA_REQUEST';
+export const SEARCH_MEDIA_SUCCESS = 'SEARCH_MEDIA_SUCCESS';
+export const SEARCH_MEDIA_ERROR = 'SEARCH_MEDIA_ERROR';
