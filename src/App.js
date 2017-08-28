@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, PropTypes } from 'react';
+//import logo from './logo.svg';
 import './App.css';
+import Header from './components/common/Header';
+import Main from './components/common/Main';
 
+// The parent component renders the Header component and component(s) in the
+// route the user navigates to.
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="container-fluid text-center">
+                <Header />
+                <Main />
+                {this.props.children}
+            </div>
+        );
+    }
 }
+
+App.propTypes = {
+    children: PropTypes.object.isRequired
+};
 
 export default App;
