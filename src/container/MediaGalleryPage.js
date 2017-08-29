@@ -108,6 +108,13 @@ class MediaGalleryPage extends Component {
         }
     }
 
+    handleKeyPress(e) {
+        console.log("handleKeyPress");
+        if (e.key === 'Enter') {
+            console.log('Click enter key');
+        }
+    }
+
     render() {
         // TODO: Render videos here
         //console.log(this.props.videos, 'Videos');
@@ -121,6 +128,7 @@ class MediaGalleryPage extends Component {
                         videos={videos}
                         selectedVideo={selectedVideo}
                         onHandleSelectVideo={this.handleSelectVideo}
+                        onKeyPress={this.handleKeyPress}
                         />
                 </div>
                 </div> : 'loading ....'}
