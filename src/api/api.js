@@ -1,6 +1,5 @@
 /**
  * Description [Access endpoint for videos.]
- * @params { String } searchQuery
  * @return { Array }
  */
 export const mockableVideos = () => {

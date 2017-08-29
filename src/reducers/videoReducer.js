@@ -13,6 +13,7 @@ export default function (state = initialState.videos, action) {
         case types.MOCKABLE_VIDEOS_SUCCESS:
             return [...state, action.videos];
         case types.SELECTED_VIDEO:
+            console.log("SELECTED_VIDEO reducer");
             return { ...state, selectedVideo: action.video };
         default:
             return state;
