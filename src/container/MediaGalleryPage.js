@@ -10,8 +10,12 @@ import VideoCarousel from '../components/VideoCarousel';
 class MediaGalleryPage extends Component {
 
     constructor() {
+        console.log("Constructor MediaGalleryPage");
         super();
         this.handleSelectVideo = this.handleSelectVideo.bind(this);
+
+        this.historyVideos = localStorage.getItem('historyVideos') ? JSON.parse(localStorage.getItem('historyVideos')) : [];
+        //console.log("HistoryVideos: " + this.historyVideos);
     }
 
     /*
@@ -65,6 +69,25 @@ class MediaGalleryPage extends Component {
             var playPromise = elem.play();
 
             if (playPromise !== undefined) {
+
+                //console.log("HistoryVideos play after push: " + this.historyVideos);
+
+                var exists = false;
+                for (var i = 0; i < this.historyVideos.length; i++) {
+                    if (this.historyVideos[i].id == selectVideo.id) {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (exists == false) {
+                    this.historyVideos.push(selectVideo);
+                    localStorage.setItem('historyVideos', JSON.stringify(this.historyVideos));
+                }
+
+                //console.log("HistoryVideos play: " + this.historyVideos);
+
+
                 playPromise.then(_ => {
                     // Automatic playback started!
                     // Show playing UI.
@@ -72,6 +95,7 @@ class MediaGalleryPage extends Component {
                     .catch(error => {
                         // Auto-play was prevented
                         // Show paused UI.
+                        console.log(error);
                     });
             }
 
@@ -108,11 +132,14 @@ class MediaGalleryPage extends Component {
         }
     }
 
-    handleKeyPress(e) {
+    handleKeyPress() {
         console.log("handleKeyPress");
+
+        /*
         if (e.key === 'Enter') {
             console.log('Click enter key');
         }
+        */
     }
 
     render() {
@@ -128,7 +155,7 @@ class MediaGalleryPage extends Component {
                         videos={videos}
                         selectedVideo={selectedVideo}
                         onHandleSelectVideo={this.handleSelectVideo}
-                        onKeyPress={this.handleKeyPress}
+                        onHandleKeyPress={this.handleKeyPress}
                         />
                 </div>
                 </div> : 'loading ....'}
