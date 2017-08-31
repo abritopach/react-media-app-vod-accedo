@@ -53,6 +53,11 @@ class MediaGalleryPage extends Component {
         //var elem = document.getElementById("selectedVideo");
         var elem = document.getElementById(selectVideo.id);
 
+        // Reset video.
+        elem.pause();
+        elem.currentTime = 0;
+        elem.load();
+
         if (elem != null) {
 
             if (elem.requestFullscreen) {
@@ -76,11 +81,15 @@ class MediaGalleryPage extends Component {
                 for (var i = 0; i < this.historyVideos.length; i++) {
                     if (this.historyVideos[i].id === selectVideo.id) {
                         exists = true;
+                        this.historyVideos[i].countViews = this.historyVideos[i].countViews + 1;
+                        localStorage.setItem('historyVideos', JSON.stringify(this.historyVideos));
                         break;
                     }
                 }
 
                 if (exists === false) {
+
+                    selectVideo.countViews = 1;
                     this.historyVideos.push(selectVideo);
                     localStorage.setItem('historyVideos', JSON.stringify(this.historyVideos));
                 }
@@ -117,6 +126,8 @@ class MediaGalleryPage extends Component {
                 if (document.webkitIsFullScreen === false) {
                     console.log("Exit fullscreen webkit");
                     elem.pause();
+                    elem.currentTime = 0;
+                    elem.load();
                 }
                 else if (document.mozFullScreen === false) {
                     console.log("Exit fullscreen moz");
