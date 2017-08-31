@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer = () => (
-    <footer>
+    <footer className="footer">
         <div className="container">
             <div className="row">
                 <p>© 2017 Adrián Brito Pacheco <a href="https://github.com/abritopach" target="_blank" rel="noopener noreferrer">GitHub</a></p>

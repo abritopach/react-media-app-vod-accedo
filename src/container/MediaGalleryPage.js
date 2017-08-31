@@ -74,13 +74,13 @@ class MediaGalleryPage extends Component {
 
                 var exists = false;
                 for (var i = 0; i < this.historyVideos.length; i++) {
-                    if (this.historyVideos[i].id == selectVideo.id) {
+                    if (this.historyVideos[i].id === selectVideo.id) {
                         exists = true;
                         break;
                     }
                 }
 
-                if (exists == false) {
+                if (exists === false) {
                     this.historyVideos.push(selectVideo);
                     localStorage.setItem('historyVideos', JSON.stringify(this.historyVideos));
                 }

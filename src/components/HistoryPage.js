@@ -4,22 +4,30 @@ import PropTypes from 'prop-types';
 // History page component.
 class HistoryPage extends Component {
 
+    /*
     constructor() {
         super();
     }
+    */
 
     render() {
         const videos = JSON.parse(localStorage.getItem('historyVideos'));
         const listItems = videos.map((video, idx) =>
-                <li className="list-group-item" key={idx}>{video.title}</li>
+                <div className="media video-history" key={idx}>
+                    <div className="media-left">
+                        <img src={video.thumbnail} className="media-object img-thumbnail img-rounded" width="64px" alt="My video thumbnail"/>
+                    </div>
+                    <div className="media-body">
+                        <h4 className="media-heading">{video.title}</h4>
+                        <p>{video.description}</p>
+                    </div>
+                </div>
         );
         return (
             <div className="center">
                 <h1 className="lead">History</h1>
                 <div>
-                    <ul className="list-group">
-                        {listItems}
-                    </ul>
+                    {listItems}
                 </div>
             </div>
         );
