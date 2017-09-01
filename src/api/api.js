@@ -10,8 +10,8 @@ export const mockableVideos = () => {
             return response.json()
         })
         .then(json => {
-            return json.entries.map(({ title, description, contents, images }) => ({
-                id: contents[0].id,
+            return json.entries.map(({ id, title, description, contents, images }) => ({
+                id: id,
                 title,
                 description,
                 mediaUrl: contents[0].url,
