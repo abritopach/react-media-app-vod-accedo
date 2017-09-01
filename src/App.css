@@ -50,7 +50,8 @@ body {
 
 .video-thumbnail {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    //justify-content: space-around;
     overflow: auto;
     overflow-y: hidden;
 }
