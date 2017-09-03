@@ -14,7 +14,7 @@ export const mockableVideos = () => {
                 id: id,
                 title,
                 description,
-                mediaUrl: contents[0].url,
+                mediaUrl: contents[0].url.replace(/^http:\/\//i, 'https://'),
                 thumbnail: images[0].url.replace(/^http:\/\//i, 'https://')
             }));
         });
