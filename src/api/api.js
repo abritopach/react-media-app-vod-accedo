@@ -15,7 +15,7 @@ export const mockableVideos = () => {
                 title,
                 description,
                 mediaUrl: contents[0].url,
-                thumbnail: images[0].url
+                thumbnail: images[0].url.replace(/^http:\/\//i, 'https://')
             }));
         });
 };
