@@ -5,22 +5,24 @@ go-live. Imagine you’re a developer on a VOD project that allows users to save
 
 1. Describe the data you would capture as part of this service.
 
-Para capturar la información de los videos se realiza una petición asíncrona utilizando el método fetch de la API fetch.
+Technically, I use fetch method from fetch API for AJAX request. It returns a promise that resolves to the response of such
+request. I simply format the response of call (id, title, description, contents, images) using ES6 destructuring assignment before returning to the store.
 
-We’re using fetch method from fetch API for our AJAX request. It returns a promise that resolves to the response of such
-request. We simply format the response of our call using ES6 destructuring assignment before returning to the store.
+From a functionally point of view, I would gather business requirements to fully understand how those VOD should be displayed, and any aditional functionalities that the project may require. It's important to understand which is the final customer to which this VOD service is entended, the required delivery schedule and technologies involved.
 
 2. How would make this service more efficient?
 
-Podríamos hacer este servicio más eficiente obteniendo sólo una parte de los videos (los videos visibles) como si
-tuviesemos paginación y obteniendo los siguientes videos visibles en futuras peticiones.
+We could make this service more efficient by just loading those videos that are being displayed on the carousel component. In this way, we would be just retrieving from the server a delimited set of videos (similar to page pagination) which are just a single slot of the entire service, improving the performance of the service. Dinamically, new videos will be shown when doing scroll or pressing on the arrows. Those videos will be retrieved by a new request.
 
 3. Once the feature is complete, how would you know that it’s ready for go-live?
 
-Para comprobar si la funcionalidad está lista para estar activa realizaría test unitarios y TDD para comprobar su
-correcto funcionamiento.
+Unit test and TDD must be completed and successfully passed and accepted by the customer to go live.
 
 4. How would you determine if this feature is successful?
 
-Para comprobar si la funcionalidad está correcta comprobaría si pasa todos los casos de uso y cumple con todos los
-requisitos exigidos.
+The feature is successful if:
+
+1) No critical or high priority incidences still open after support period of the project.
+2) Metrics shows that all functionalities are being in use without bugs and with the expected traffic flow.
+3) Formal and unformal feedback from users and customers is positive.
+
