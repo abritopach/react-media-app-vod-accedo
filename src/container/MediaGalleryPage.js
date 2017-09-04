@@ -12,9 +12,8 @@ class MediaGalleryPage extends Component {
     constructor() {
         super();
         this.handleSelectVideo = this.handleSelectVideo.bind(this);
-
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.historyVideos = localStorage.getItem('historyVideos') ? JSON.parse(localStorage.getItem('historyVideos')) : [];
-        //console.log("HistoryVideos: " + this.historyVideos);
     }
 
     /*
@@ -32,14 +31,46 @@ class MediaGalleryPage extends Component {
 
     handleSelectVideo(selectedVideo) {
         //console.log(selectedVideo);
+
+        var elem = document.getElementById(selectedVideo.id);
+
         this.props.dispatch(selectVideoAction(selectedVideo));
 
-        this.handleFullScreenVideo(selectedVideo);
+        this.handleFullScreenVideo(selectedVideo, elem);
     }
 
-    handleFullScreenVideo(selectVideo) {
+    handleKeyPress(selectedVideo, i, event) {
 
-        var elem = document.getElementById(selectVideo.id);
+        var elem = document.getElementById(selectedVideo.id);
+        var videoCarousel = document.getElementById("video-thumbnail");
+
+        // Reset video.
+        elem.pause();
+        elem.currentTime = 0;
+        elem.load();
+
+        if (event.keyCode === 37) {
+            if (i > 0) {
+                elem = videoCarousel.childNodes[i - 1];
+                elem.firstElementChild.focus();
+            }
+        } else if (event.keyCode === 39) {
+            if (i < videoCarousel.childNodes.length - 1) {
+
+                elem = videoCarousel.childNodes[i + 1];
+                elem.firstElementChild.focus();
+            }
+        }
+
+        if (event.key === 'Enter') {
+
+            this.handleFullScreenVideo(selectedVideo, elem)
+        }
+    }
+
+    handleFullScreenVideo(selectVideo, elem) {
+
+        //var elem = document.getElementById(selectVideo.id);
 
         // Reset video.
         elem.pause();
@@ -136,6 +167,7 @@ class MediaGalleryPage extends Component {
                         videos={videos}
                         selectedVideo={selectedVideo}
                         onHandleSelectVideo={this.handleSelectVideo}
+                        onHandleKeyPress={this.handleKeyPress}
                         />
                 </div>
                 </div> : 'loading ....'}

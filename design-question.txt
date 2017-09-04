@@ -1,0 +1,26 @@
+Design Question
+
+At Accedo, our developers are involved throughout the entire product development process; from pre-sales all the way to
+go-live. Imagine you’re a developer on a VOD project that allows users to save the videos they want to watch later.
+
+1. Describe the data you would capture as part of this service.
+
+Para capturar la información de los videos se realiza una petición asíncrona utilizando el método fetch de la API fetch.
+
+We’re using fetch method from fetch API for our AJAX request. It returns a promise that resolves to the response of such
+request. We simply format the response of our call using ES6 destructuring assignment before returning to the store.
+
+2. How would make this service more efficient?
+
+Podríamos hacer este servicio más eficiente obteniendo sólo una parte de los videos (los videos visibles) como si
+tuviesemos paginación y obteniendo los siguientes videos visibles en futuras peticiones.
+
+3. Once the feature is complete, how would you know that it’s ready for go-live?
+
+Para comprobar si la funcionalidad está lista para estar activa realizaría test unitarios y TDD para comprobar su
+correcto funcionamiento.
+
+4. How would you determine if this feature is successful?
+
+Para comprobar si la funcionalidad está correcta comprobaría si pasa todos los casos de uso y cumple con todos los
+requisitos exigidos.
