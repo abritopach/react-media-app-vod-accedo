@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 // History page component.
 class HistoryPage extends Component {
 
-    /*
-    constructor() {
-        super();
-    }
-    */
-
     render() {
         const videos = JSON.parse(localStorage.getItem('historyVideos'));
         let listItems = [];
@@ -33,7 +27,6 @@ class HistoryPage extends Component {
                 <h1 className="lead">Viewing History</h1>
                 <div>
                     {listItems}
-                    {/*<button type="button" className="btn btn-primary">Save history</button>*/}
                 </div>
             </div>
         );

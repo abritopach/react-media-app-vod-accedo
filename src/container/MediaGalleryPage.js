@@ -10,7 +10,6 @@ import VideoCarousel from '../components/VideoCarousel';
 class MediaGalleryPage extends Component {
 
     constructor() {
-        console.log("Constructor MediaGalleryPage");
         super();
         this.handleSelectVideo = this.handleSelectVideo.bind(this);
 
@@ -26,23 +25,13 @@ class MediaGalleryPage extends Component {
     */
 
     // Dispatches *searchMediaAction*  immediately after initial rendering.
-    // Note that we are using the dispatch method from the store to execute this task, courtesy of react-redux
+    // Note that we are using the dispatch method from the store to execute this task, courtesy of react-redux.
     componentDidMount() {
         this.props.dispatch(searchMediaAction());
     }
 
-    /*
-    componentWillReceiveProps(nextProps){
-        console.log(this.props.selectedVideo);
-        console.log(nextProps.selectedVideo);
-        if(nextProps.selectedVideo !== this.props.selectedVideo){
-            this.handleFullScreenVideo();
-        }
-    }
-    */
-
     handleSelectVideo(selectedVideo) {
-        console.log(selectedVideo);
+        //console.log(selectedVideo);
         this.props.dispatch(selectVideoAction(selectedVideo));
 
         this.handleFullScreenVideo(selectedVideo);
@@ -50,7 +39,6 @@ class MediaGalleryPage extends Component {
 
     handleFullScreenVideo(selectVideo) {
 
-        //var elem = document.getElementById("selectedVideo");
         var elem = document.getElementById(selectVideo.id);
 
         // Reset video.
@@ -75,8 +63,6 @@ class MediaGalleryPage extends Component {
 
             if (playPromise !== undefined) {
 
-                //console.log("HistoryVideos play after push: " + this.historyVideos);
-
                 var exists = false;
                 for (var i = 0; i < this.historyVideos.length; i++) {
                     if (this.historyVideos[i].id === selectVideo.id) {
@@ -94,8 +80,6 @@ class MediaGalleryPage extends Component {
                     localStorage.setItem('historyVideos', JSON.stringify(this.historyVideos));
                 }
 
-                //console.log("HistoryVideos play: " + this.historyVideos);
-
 
                 playPromise.then(_ => {
                     // Automatic playback started!
@@ -111,8 +95,6 @@ class MediaGalleryPage extends Component {
             // Video Ended.
             document.getElementById(selectVideo.id).addEventListener('ended', myHandler,false);
             function myHandler(e) {
-                // What you want to do after the event
-                console.log("Video ended");
                 elem.webkitExitFullScreen();
             }
 
@@ -124,18 +106,19 @@ class MediaGalleryPage extends Component {
 
             function exitHandler() {
                 if (document.webkitIsFullScreen === false) {
-                    console.log("Exit fullscreen webkit");
                     elem.pause();
                     elem.currentTime = 0;
                     elem.load();
                 }
                 else if (document.mozFullScreen === false) {
-                    console.log("Exit fullscreen moz");
                     elem.pause();
+                    elem.currentTime = 0;
+                    elem.load();
                 }
                 else if (document.msFullscreenElement === false) {
-                    console.log("Exit fullscreen ms");
                     elem.pause();
+                    elem.currentTime = 0;
+                    elem.load();
                 }
             }
 
@@ -143,20 +126,7 @@ class MediaGalleryPage extends Component {
         }
     }
 
-    handleKeyPress() {
-        console.log("handleKeyPress");
-
-        /*
-        if (e.key === 'Enter') {
-            console.log('Click enter key');
-        }
-        */
-    }
-
     render() {
-        // TODO: Render videos here
-        //console.log(this.props.videos, 'Videos');
-        //console.log(this.props.selectedVideo, 'SelectedVideo');
         const { videos, selectedVideo } = this.props;
         return (
             <div className="container-fluid">
@@ -166,7 +136,6 @@ class MediaGalleryPage extends Component {
                         videos={videos}
                         selectedVideo={selectedVideo}
                         onHandleSelectVideo={this.handleSelectVideo}
-                        onHandleKeyPress={this.handleKeyPress}
                         />
                 </div>
                 </div> : 'loading ....'}
@@ -181,11 +150,11 @@ MediaGalleryPage.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-/* Subscribe component to redux store and merge the state into component\s props */
+/* Subscribe component to redux store and merge the state into component's props. */
 const mapStateToProps = ({ images, videos }) => ({
     videos: videos[0],
     selectedVideo: videos.selectedVideo
 });
 
-/* connect method from react-router connects the component with redux store */
+/* Connect method from react-router connects the component with redux store. */
 export default connect(mapStateToProps)(MediaGalleryPage);
